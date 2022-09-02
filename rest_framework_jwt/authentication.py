@@ -1,8 +1,8 @@
 import jwt
 
 from django.contrib.auth import get_user_model
-from django.utils.encoding import smart_text
-from django.utils.translation import ugettext as _
+from django.utils.encoding import smart_str
+from django.utils.translation import gettext as _
 from rest_framework import exceptions
 from rest_framework.authentication import (
     BaseAuthentication, get_authorization_header
@@ -87,7 +87,7 @@ class JSONWebTokenAuthentication(BaseJSONWebTokenAuthentication):
                 return request.COOKIES.get(api_settings.JWT_AUTH_COOKIE)
             return None
 
-        if smart_text(auth[0].lower()) != auth_header_prefix:
+        if smart_str(auth[0].lower()) != auth_header_prefix:
             return None
 
         if len(auth) == 1:
